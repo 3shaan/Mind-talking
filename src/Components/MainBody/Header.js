@@ -1,5 +1,6 @@
 import { Navbar } from 'flowbite-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from "../../assets/logo.png"
 
 const Header = () => {
@@ -31,9 +32,11 @@ const Header = () => {
           <Navbar.Link href="/navbars" className="hover:underline text-xl">
             About
           </Navbar.Link>
-          <Navbar.Link href="/navbars" className="hover:underline text-xl">
-            Services
-          </Navbar.Link>
+          <Link to={'/services'}>
+            <Navbar.Link className="hover:underline text-xl">
+              Services
+            </Navbar.Link>
+          </Link>
           <Navbar.Link href="/navbars" className="hover:underline text-xl">
             Blogs
           </Navbar.Link>

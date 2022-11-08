@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainPage from "../Components/MainBody/MainPage";
+import Services from "../Components/Services/Services";
 import Root from "./Root";
 
 export const router = createBrowserRouter([
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element:<MainPage></MainPage>
+            },
+            {
+                path: '/services',
+                element:<Services></Services>
             }
         ]
     }
