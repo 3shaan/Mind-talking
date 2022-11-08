@@ -1,4 +1,3 @@
-import React from 'react';
 import ServiceBanner from './ServiceBanner';
 import { Get } from "react-axios";
 import ServiceCard from './ServiceCard';
