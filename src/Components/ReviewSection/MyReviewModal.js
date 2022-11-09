@@ -1,12 +1,16 @@
+import { Button, Checkbox, Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import React from 'react';
 
-const Review = () => {
-    return (
-      <div className='mt-10'>
-        <h1 className="text-3xl font-bold ml-10">
-          Please Leave A Review of this Service
-        </h1>
-        <div>
+const MyReviewModal = ({ open, singleReview, SetOpen }) => {
+    const { comment, rating ,email, age, img, name,} = singleReview;
+  return (
+    <div>
+      <Modal show={open} size="7xl" popup={true}>
+        <Modal.Header onClick={() => SetOpen(false)} />
+        <Modal.Body>
+          <p className="text-3xl font-semibold text-center text-gray-700">
+            Update Your Review
+          </p>
           <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
             <form
               action=""
@@ -21,7 +25,7 @@ const Review = () => {
                     <input
                       id="firstname"
                       type="text"
-                      placeholder="First name"
+                      defaultValue={name?.split(" ")[0]}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -32,7 +36,7 @@ const Review = () => {
                     <input
                       id="lastname"
                       type="text"
-                      placeholder="Last name"
+                      defaultValue={name?.split(" ")[1] ? name?.split(" ")[1] :''}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -43,7 +47,9 @@ const Review = () => {
                     <input
                       id="email"
                       type="email"
-                      placeholder="Email"
+                      readOnly
+                      disabled
+                      defaultValue={email}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -54,7 +60,7 @@ const Review = () => {
                     <input
                       id="username"
                       type="text"
-                      placeholder="https://"
+                      defaultValue={img}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -65,7 +71,7 @@ const Review = () => {
                     <input
                       id="rate"
                       type="number"
-                      placeholder="4.5"
+                      defaultValue={age}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -76,7 +82,7 @@ const Review = () => {
                     <input
                       id="age"
                       type="number"
-                      placeholder="ex.23"
+                      defaultValue={age}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -86,7 +92,7 @@ const Review = () => {
                     </label>
                     <textarea
                       id="bio"
-                      placeholder="Write your comment about this service"
+                      defaultValue={comment}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     ></textarea>
                   </div>
@@ -94,15 +100,16 @@ const Review = () => {
                     type="submit"
                     className="col-span-full text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   >
-                    Submit
+                    Update
                   </button>
                 </div>
               </fieldset>
             </form>
           </section>
-        </div>
-      </div>
-    );
+        </Modal.Body>
+      </Modal>
+    </div>
+  );
 };
 
-export default Review;
+export default MyReviewModal;

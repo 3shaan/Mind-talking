@@ -2,7 +2,6 @@ import React from "react";
 import { ImQuotesLeft } from "react-icons/im";
 
 const ReviewCard = ({ reviewData }) => {
-  console.log(reviewData);
   const { img, comment,age,service,rating,name,} = reviewData;
   return (
     <div>

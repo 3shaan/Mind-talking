@@ -1,6 +1,6 @@
 import { Navbar } from "flowbite-react";
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { authContext } from "../Context/Context";
 
