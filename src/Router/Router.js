@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Login from "../Components/Login and SignUp/Login";
+import SignUp from "../Components/Login and SignUp/SignUp";
 import MainPage from "../Components/MainBody/MainPage";
 import ServiceDetails from "../Components/ServiceDetails/ServiceDetails";
 import Services from "../Components/Services/Services";
@@ -25,6 +27,14 @@ export const router = createBrowserRouter([
                       `http://localhost:5000/services/${params.id}`
                     );
                 }
+            },
+            {
+                path: '/login',
+                element:<Login></Login>
+            },
+            {
+                path: '/signup',
+                element:<SignUp></SignUp>
             }
         ]
     }

@@ -1,6 +1,6 @@
 import { Navbar } from "flowbite-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 const Header = () => {
@@ -24,19 +24,25 @@ const Header = () => {
       <Navbar.Collapse>
         <Navbar.Link
           href="/navbars"
-          active={true}
           className="hover:underline text-xl"
         >
           Home
         </Navbar.Link>
-        <Navbar.Link href="/navbars" className="hover:underline text-xl">
-          About
-        </Navbar.Link>
-        <Link to={"/services"}>
+        <NavLink to={"/services"}>
           <Navbar.Link className="hover:underline text-xl">
             Services
           </Navbar.Link>
-        </Link>
+        </NavLink>
+        <NavLink to={"/login"}>
+          <Navbar.Link className="hover:underline text-xl">
+            Login
+          </Navbar.Link>
+        </NavLink>
+        <NavLink to={"/signup"}>
+          <Navbar.Link className="hover:underline text-xl">
+            Register
+          </Navbar.Link>
+        </NavLink>
         <Navbar.Link href="/navbars" className="hover:underline text-xl">
           Blogs
         </Navbar.Link>
