@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router';
 import ServiceDesc from './ServiceDesc';
 import ServiceDetailsBanner from './ServiceDetailsBanner';
 import MoreService from './MoreService';
 import Review from './Review';
+import { authContext } from '../Context/Context';
+import { Link } from 'react-router-dom';
+import CommentSection from '../ReviewSection/CommentSection';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-  const { _id,title,price } = service;
+  const { _id, title, price } = service;
+  const { user } = useContext(authContext);
     return (
       <div>
         <div>
@@ -38,7 +42,18 @@ const ServiceDetails = () => {
           </div>
         </div>
         {/* review  */}
-        <Review></Review>
+        {user?.uid ? (
+          <Review></Review>
+        ) : (
+          <div className="text-xl ml-16 mb-10 text-center font-semibold">
+            
+            Please <Link to={'/login'} className="underline text-green-600">log in</Link> to leave a review
+          </div>
+        )}
+        {/* <Review></Review> */}
+        <div className='w-11/12 mx-auto mb-2'>
+          <CommentSection id={_id}></CommentSection>
+        </div>
       </div>
     );
 };

@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
 import {
   MdAlternateEmail,
   MdFacebook,
   MdOutlineLock,
-  MdPerson,
 } from "react-icons/md";
 import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { authContext } from "../Context/Context";
 
 const Login = () => {
+    const { Login, googleSignIn } = useContext(authContext);
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.text.value;
     const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, email, password);
-  };
+      const password = form.password.value;
+      Login(email, password)
+          .then(result => {
+              console.log(result.user)
+          })
+          .catch(err => console.log(err));
+    console.log(email, password);
+    };
+    
+    //google log in
+
+    const googleHandle = () => {
+      googleSignIn()
+        .then(() => {})
+        .catch((err) => console.log(err));
+    };
+
   return (
-    <div className="flex lg:w-9/12 mx-auto lg:gap-8">
+    <div className="flex lg:w-8/12 mx-auto lg:gap-16 lg:mt-10">
       <div>
         <img
-          src="https://rurutek.com/jio/assets/img/login-animate.gif"
+          src="https://aacharyacomputer.in/login/website_images/gif_login.gif"
           alt=""
         />
       </div>
@@ -66,33 +83,36 @@ const Login = () => {
             >
               Submit
             </button>
-
-            <p class="mt-8 text-center text-xs">or Login with</p>
-
-            <ul class="mt-4 flex justify-center">
-              <li class="mx-1">
-                <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#DB4437] rounded-full">
-                  <AiOutlineGoogle className="text-white text-xl"></AiOutlineGoogle>
-                </button>
-              </li>
-              <li class="mx-1">
-                <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#1DA1F2] rounded-full">
-                  <AiOutlineGithub className="text-white text-xl"></AiOutlineGithub>
-                </button>
-              </li>
-              <li class="mx-1">
-                <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#4267B2] rounded-full">
-                  <MdFacebook className="text-white text-xl"></MdFacebook>
-                </button>
-              </li>
-            </ul>
-            <p className="text-xs mt-3 text-center">
-              Don't have an account?
-              <Link to={"/signup"} className="underline text-red-700 ml-2">
-                Sign up
-              </Link>
-            </p>
           </form>
+
+          <p class="mt-8 text-center text-xs">or Login with</p>
+
+          <ul class="mt-4 flex justify-center">
+            <li class="mx-1">
+              <button
+                onClick={googleHandle}
+                class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#DB4437] rounded-full"
+              >
+                <AiOutlineGoogle className="text-white text-xl"></AiOutlineGoogle>
+              </button>
+            </li>
+            <li class="mx-1">
+              <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#1DA1F2] rounded-full">
+                <AiOutlineGithub className="text-white text-xl"></AiOutlineGithub>
+              </button>
+            </li>
+            <li class="mx-1">
+              <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#4267B2] rounded-full">
+                <MdFacebook className="text-white text-xl"></MdFacebook>
+              </button>
+            </li>
+          </ul>
+          <p className="text-xs mt-3 text-center">
+            Don't have an account?
+            <Link to={"/signup"} className="underline text-red-700 ml-2">
+              Sign up
+            </Link>
+          </p>
         </CustomCard>
       </div>
     </div>

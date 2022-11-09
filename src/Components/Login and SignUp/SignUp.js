@@ -5,10 +5,11 @@ import { MdAlternateEmail, MdFacebook, MdOutlineLock, MdPerson } from "react-ico
 import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { authContext } from '../Context/Context';
+import { updateProfile } from 'firebase/auth';
 
 
 const SignUp = () => {
-    const { SignIn } = useContext(authContext);
+    const { SignIn, auth, googleSignIn } = useContext(authContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,10 +19,20 @@ const SignUp = () => {
         const password = form.password.value;
         SignIn(email, password)
             .then(result => {
-                console.log(result.user)
+                console.log(result.user);
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => { }).catch(err => console.log(err));
+                form.reset();
+
             })
             .catch(err => console.log(err));
-        console.log(name,email,password)
+        console.log(name, email, password)
+    };
+
+    const googleHandle = () => {
+        googleSignIn()
+            .then(() => { }).catch(err => console.log(err));
     }
     return (
       <div className="flex lg:w-9/12 mx-auto lg:gap-8">
@@ -48,7 +59,8 @@ const SignUp = () => {
                   name="text"
                   id="text"
                   placeholder="Full Name"
-                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg " required
+                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg "
+                  required
                 />
               </label>
               <label htmlFor="email">Email :</label>
@@ -59,7 +71,8 @@ const SignUp = () => {
                   name="email"
                   id="email"
                   placeholder="Email"
-                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg " required
+                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg "
+                  required
                 />
               </label>
               <label htmlFor="password">Password :</label>
@@ -70,7 +83,8 @@ const SignUp = () => {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg " required
+                  class="form-input transition-colors duration-200 py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 w-full focus:shadow-sm focus:outline-none leading-none placeholder-gray-400 appearance-none block pl-12  rounded-lg "
+                  required
                 />
               </label>
               <button
@@ -79,34 +93,35 @@ const SignUp = () => {
               >
                 Submit
               </button>
-
-              <p class="mt-8 text-center text-xs">or Sign up with</p>
-
-              <ul class="mt-4 flex justify-center">
-                <li class="mx-1">
-                  <button
-                    class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#DB4437] rounded-full"
-                  >
-                   <AiOutlineGoogle className='text-white text-xl'></AiOutlineGoogle>
-                  </button>
-                </li>
-                <li class="mx-1">
-                  <button
-                    class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#1DA1F2] rounded-full"
-                  >
-                  <AiOutlineGithub className='text-white text-xl'></AiOutlineGithub>
-                  </button>
-                </li>
-                <li class="mx-1">
-                  <button
-                    class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#4267B2] rounded-full"
-                  >
-                   <MdFacebook className='text-white text-xl'></MdFacebook>
-                  </button>
-                </li>
-              </ul>
-              <p className='text-xs mt-3 text-center'>Already have an account? <Link to={'/login'} className="underline text-red-700">log in</Link></p>
             </form>
+            <p class="mt-8 text-center text-xs">or Sign up with</p>
+
+            <ul class="mt-4 flex justify-center">
+              <li class="mx-1">
+                <button
+                  onClick={googleHandle}
+                  class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#DB4437] rounded-full"
+                >
+                  <AiOutlineGoogle className="text-white text-xl"></AiOutlineGoogle>
+                </button>
+              </li>
+              <li class="mx-1">
+                <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#1DA1F2] rounded-full">
+                  <AiOutlineGithub className="text-white text-xl"></AiOutlineGithub>
+                </button>
+              </li>
+              <li class="mx-1">
+                <button class="hover:shadow-lg transform transition hover:-translate-y-1 w-10 h-10 flex justify-center items-center bg-[#4267B2] rounded-full">
+                  <MdFacebook className="text-white text-xl"></MdFacebook>
+                </button>
+              </li>
+            </ul>
+            <p className="text-xs mt-3 text-center">
+              Already have an account?{" "}
+              <Link to={"/login"} className="underline text-red-700">
+                log in
+              </Link>
+            </p>
           </CustomCard>
         </div>
       </div>
