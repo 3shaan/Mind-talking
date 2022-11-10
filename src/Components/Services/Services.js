@@ -1,5 +1,4 @@
 import ServiceBanner from './ServiceBanner';
-import { Get } from "react-axios";
 import ServiceCard from './ServiceCard';
 import { useEffect, useState } from 'react';
 

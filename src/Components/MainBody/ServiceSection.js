@@ -1,6 +1,6 @@
 import { Button } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import { Get } from 'react-axios';
+import { Link } from 'react-router-dom';
 import ServiceCard from '../Services/ServiceCard';
 
 const ServiceSection = () => {
@@ -27,10 +27,12 @@ const ServiceSection = () => {
             ))}
           </div>
         </div>
-        <div className="flex justify-center my-5">
-          <Button className=" transform transition duration-500 hover:scale-110 bg-green-600 hover:bg-green-700">
-            See More Services
-          </Button>
+        <div className="flex justify-center mb-5 mt-10">
+          <Link to={"/services"}>
+            <Button className=" transform transition duration-500 hover:scale-110 bg-green-600 hover:bg-green-700">
+              See More Services
+            </Button>
+          </Link>
         </div>
       </div>
     );

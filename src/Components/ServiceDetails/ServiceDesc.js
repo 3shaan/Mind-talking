@@ -1,8 +1,10 @@
-import React from 'react';
+import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const ServiceDesc = ({ service }) => {
-    const { title, des, img, benifits } = service;
+  const { title, des, img, benifits } = service;
   return (
     <div className="mt-10 w-11/12 mx-auto">
       <h1 className="text-3xl text-center">{title}</h1>
@@ -11,7 +13,18 @@ const ServiceDesc = ({ service }) => {
         <h1 className="text-xl text-gray-700 my-5 ml-2">{des}</h1>
       </div>
       <div>
-        <img src={img} alt="" />
+        <PhotoProvider
+          speed={() => 800}
+          easing={(type) =>
+            type === 2
+              ? "cubic-bezier(0.36, 0, 0.66, -0.56)"
+              : "cubic-bezier(0.34, 1.56, 0.64, 1)"
+          }
+        >
+          <PhotoView src={img}>
+            <img src={img} alt="" />
+          </PhotoView>
+        </PhotoProvider>
       </div>
       <div>
         <h1 className="text-2xl my-5 font-semibold">

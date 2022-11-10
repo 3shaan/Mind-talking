@@ -7,6 +7,7 @@ const auth = getAuth(app);
 const Context = ({ children }) => {
     const [user, setUser] = useState(null);
     const googleProvider = new GoogleAuthProvider();
+    const [isLoading, setLoading] = useState(true);
 
     //sign IN
     const SignIn = (email, password) => {
@@ -17,6 +18,8 @@ const Context = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log(currentUser);
+            setLoading(false);
+            
         })
         return () => unsubscribe();
     }, [])
@@ -33,12 +36,21 @@ const Context = ({ children }) => {
 
     //log out
     const logOut = () => {
+        localStorage.removeItem('token')
         return signOut(auth)
             .then(() => { }).catch(err => console.log(err));
     }
     
 
-    const contextValue = { SignIn, auth, googleSignIn, user, Login, logOut };
+    const contextValue = {
+      SignIn,
+      auth,
+      googleSignIn,
+      user,
+      Login,
+      logOut,
+      isLoading,
+    };
     return (
         <authContext.Provider value={contextValue}>
             {children}

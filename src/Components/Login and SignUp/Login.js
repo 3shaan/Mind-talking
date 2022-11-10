@@ -7,13 +7,15 @@ import {
   MdOutlineLock,
 } from "react-icons/md";
 import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Context";
 
 const Login = () => {
-    const { Login, googleSignIn } = useContext(authContext);
 
-
+  const { Login, googleSignIn } = useContext(authContext);
+  const location = useLocation();
+  const navigation = useNavigate();
+  const from = location?.state?.from?.pathname || '/'
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,8 +23,30 @@ const Login = () => {
     const email = form.email.value;
       const password = form.password.value;
       Login(email, password)
-          .then(result => {
-              console.log(result.user)
+        .then(result => {
+          const user = result?.user;
+          const email = {
+            email: user?.email
+          }
+          console.log(email)
+          //jwt token
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(email)
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+              localStorage.setItem("token", data?.token);
+               navigation(from, { replace: true });
+            })
+            .catch(err => console.log(err));
+
+            console.log(user)
+           
           })
           .catch(err => console.log(err));
     console.log(email, password);

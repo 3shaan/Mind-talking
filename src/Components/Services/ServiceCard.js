@@ -6,9 +6,9 @@ const ServiceCard = ({ ServiceData }) => {
   const { _id, img, title, price, des } = ServiceData;
   return (
     <Link to={`/services/${_id}`}>
-      <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 group overflow-hidden transform transition hover:scale-y-110 duration-500">
+      <div className="max-w-sm min-h-[480px] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 group overflow-hidden transform transition hover:scale-y-110 duration-500">
         <img
-          className="rounded-t-lg transform transition duration-500 group-hover:scale-110 "
+          className="lg:w-96 h-64 rounded-t-lg transform transition duration-500 group-hover:scale-110 "
           src={img}
           alt=""
         />
@@ -22,7 +22,7 @@ const ServiceCard = ({ ServiceData }) => {
           </p>
           <div className="my-3">
             <p className="text-green-500 font-semibold hover:">
-              Price :${price}{" "}
+              Price :${price}
             </p>
           </div>
           <div className="flex justify-between">

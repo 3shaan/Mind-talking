@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { useNavigate } from "react-router";
 import { authContext } from "../Context/Context";
 import MyReviewDelete from "./MyReviewDelete";
 import MyReviewModal from "./MyReviewModal";
@@ -9,18 +10,29 @@ const MyReview = () => {
     const [isOpen, SetOpen] = useState(false);
     const [singleReview, setSingleReview] = useState([]);
   const [isDelete, SetDelete] = useState(false);
-  const { user } = useContext(authContext);
+  const { user, logOut } = useContext(authContext);
   const [load, setLoad] = useState(false);
+  const navigation = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myreview/${user?.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/myreview/${user?.email}`, {
+      headers: {
+        "authorization":localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          navigation('/login')
+          return logOut();
+        }
+        return res.json()
+      })
       .then((data) => {
         console.log(data);
         setReview(data);
       })
       .catch((err) => console.log(err));
-  }, [user?.email, load]);
+  }, [user?.email, load, navigation, logOut]);
 
   //edit review
     const editModal = (review) => {
@@ -40,7 +52,8 @@ const MyReview = () => {
       <h1 className="text-3xl font-semibold text-center text-gray-800 my-5">
         See all Your Review In one Place
       </h1>
-      <div>
+      {
+        reviews.length > 0 ? <div>
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
@@ -108,7 +121,10 @@ const MyReview = () => {
             load={load}
           ></MyReviewDelete>
         </div>
+        </div> : <div>
+            <h1 className="text-3xl text-center mt-16 text-orange-600">You haven't review any Services.</h1>
       </div>
+      }
     </div>
   );
 };
