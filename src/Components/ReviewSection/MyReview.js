@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { authContext } from "../Context/Context";
 import MyReviewDelete from "./MyReviewDelete";
 import MyReviewModal from "./MyReviewModal";
 
@@ -7,22 +8,33 @@ const MyReview = () => {
     const [reviews, setReview] = useState([]);
     const [isOpen, SetOpen] = useState(false);
     const [singleReview, setSingleReview] = useState([]);
-    const [isDelete, SetDelete] = useState(false);
+  const [isDelete, SetDelete] = useState(false);
+  const { user } = useContext(authContext);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myreview/test@test.com`)
+    fetch(`http://localhost:5000/myreview/${user?.email}`)
       .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-          setReview(data);
+      .then((data) => {
+        console.log(data);
+        setReview(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [user?.email, load]);
+
+  //edit review
     const editModal = (review) => {
-        console.log(review)
         setSingleReview(review);
         SetOpen(true);
-    }
+  }
+  
+  //delete review
+  const reviewDelete = (review) => {
+         setSingleReview(review);
+    SetDelete(true);
+  };
+
+
   return (
     <div>
       <h1 className="text-3xl font-semibold text-center text-gray-800 my-5">
@@ -72,7 +84,8 @@ const MyReview = () => {
                       <button onClick={() => editModal(review)}>
                         <AiFillEdit className="text-3xl text-green-600"></AiFillEdit>
                       </button>
-                      <button onClick={()=>SetDelete(true)}> <AiFillDelete className="text-3xl text-orange-700"></AiFillDelete>
+                      <button onClick={() => reviewDelete(review)}>
+                        <AiFillDelete className="text-3xl text-orange-700"></AiFillDelete>
                       </button>
                     </td>
                   </tr>
@@ -84,10 +97,15 @@ const MyReview = () => {
             singleReview={singleReview}
             open={isOpen}
             SetOpen={SetOpen}
+            setLoad={setLoad}
+            load={load}
           ></MyReviewModal>
           <MyReviewDelete
             SetDelete={SetDelete}
             isDelete={isDelete}
+            singleReview={singleReview}
+            setLoad={setLoad}
+            load={load}
           ></MyReviewDelete>
         </div>
       </div>

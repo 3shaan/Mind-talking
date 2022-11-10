@@ -1,8 +1,52 @@
-import { Button, Checkbox, Label, Modal, Textarea, TextInput } from 'flowbite-react';
+import { Modal} from 'flowbite-react';
 import React from 'react';
+import Swal from 'sweetalert2';
 
-const MyReviewModal = ({ open, singleReview, SetOpen }) => {
-    const { comment, rating ,email, age, img, name,} = singleReview;
+const MyReviewModal = ({ open, singleReview, SetOpen, setLoad, load }) => {
+  const { comment, rating, email, age, img, name } = singleReview;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const rating = form.rate.value;
+    const img = form.url.value;
+    const age = form.age.value;
+    const comment = form.text.value;
+    const name = firstName + " " + lastName;
+    const review = {
+      name,
+      rating,
+      img,
+      age,
+      comment,
+    };
+    fetch(`http://localhost:5000/user_review/${singleReview._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((data) => {
+        if (data?.ok === true) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Review update successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          SetOpen(false);
+          setLoad(!load);
+        }
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+
+    console.log(review);
+  };
   return (
     <div>
       <Modal show={open} size="7xl" popup={true}>
@@ -13,6 +57,7 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
           </p>
           <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
             <form
+              onSubmit={handleSubmit}
               action=""
               className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
             >
@@ -23,6 +68,7 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       First name
                     </label>
                     <input
+                      name="firstName"
                       id="firstname"
                       type="text"
                       defaultValue={name?.split(" ")[0]}
@@ -34,9 +80,12 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       Last name
                     </label>
                     <input
+                      name="lastName"
                       id="lastname"
                       type="text"
-                      defaultValue={name?.split(" ")[1] ? name?.split(" ")[1] :''}
+                      defaultValue={
+                        name?.split(" ")[1] ? name?.split(" ")[1] : ""
+                      }
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -45,6 +94,7 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       Email
                     </label>
                     <input
+                      name="email"
                       id="email"
                       type="email"
                       readOnly
@@ -58,8 +108,9 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       PhotoURL
                     </label>
                     <input
+                      name="url"
                       id="username"
-                      type="text"
+                      type="url"
                       defaultValue={img}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
@@ -69,9 +120,10 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       Rating(out of 5)
                     </label>
                     <input
+                      name="rate"
                       id="rate"
                       type="number"
-                      defaultValue={age}
+                      defaultValue={rating}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"
                     />
                   </div>
@@ -80,6 +132,7 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       Your Age
                     </label>
                     <input
+                      name="age"
                       id="age"
                       type="number"
                       defaultValue={age}
@@ -91,6 +144,7 @@ const MyReviewModal = ({ open, singleReview, SetOpen }) => {
                       Your Comment
                     </label>
                     <textarea
+                      name="text"
                       id="bio"
                       defaultValue={comment}
                       className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-900"

@@ -43,15 +43,18 @@ const ServiceDetails = () => {
         </div>
         {/* review  */}
         {user?.uid ? (
-          <Review></Review>
+          <Review singleService={service}></Review>
         ) : (
           <div className="text-xl ml-16 mb-10 text-center font-semibold">
-            
-            Please <Link to={'/login'} className="underline text-green-600">log in</Link> to leave a review
+            Please
+            <Link to={"/login"} className="underline text-green-600">
+              log in
+            </Link>
+            to leave a review
           </div>
         )}
         {/* <Review></Review> */}
-        <div className='w-11/12 mx-auto mb-2'>
+        <div className="w-11/12 mx-auto mb-2">
           <CommentSection id={_id}></CommentSection>
         </div>
       </div>

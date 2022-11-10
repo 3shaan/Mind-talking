@@ -38,7 +38,7 @@ const Header = () => {
         </Navbar.Link>
         {user?.uid ? (
           <>
-            <NavLink to={"/"}>
+            <NavLink to={"/add_services"}>
               <Navbar.Link className="hover:underline text-xl">
                 Add Service
               </Navbar.Link>
