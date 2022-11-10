@@ -30,7 +30,7 @@ const ServiceDesc = ({ service }) => {
         <h1 className="text-2xl my-5 font-semibold">
           What benefit's will you get from this Counciling?
         </h1>
-        <ul className="grid grid-cols-2 gap-5 mb-10 border p-5 rounded-lg border-gray-300">
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-10 border p-5 rounded-lg border-gray-300">
           {benifits.map((benifit) => {
             return (
               <div className="flex items-center gap-3 text-xl">

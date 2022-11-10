@@ -14,10 +14,10 @@ const ServiceBanner = () => {
           <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-75"></div>
 
           <main className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  absolute z-10">
-            <h1 className="text-center text-white text-3xl my-3 font-bold">
+            <h1 className="text-center text-white lg:text-3xl my-3 font-bold">
               --- Our Services ---
             </h1>
-            <h1 className="text-white text-4xl text-center font-semibold font-sans">
+            <h1 className="text-white lg:text-4xl text-center font-semibold font-sans">
               Complete set of programs <br /> designed to help people having{" "}
               <br /> mental issues.
             </h1>

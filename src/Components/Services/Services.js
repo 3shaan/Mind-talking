@@ -17,7 +17,7 @@ const Services = () => {
       {/* services card  */}
 
       <div className="w-11/12 mx-auto mt-10">
-        <div className="grid grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {service.map((data) => (
             <ServiceCard key={data._id} ServiceData={data}></ServiceCard>
           ))}

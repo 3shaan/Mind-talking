@@ -1,17 +1,17 @@
-import { Card } from 'flowbite-react';
-import React from 'react';
-import Stars from "react-stars-display"
+import { Card } from "flowbite-react";
+import React from "react";
+import Stars from "react-stars-display";
 
 const CommentCard = ({ commentData }) => {
-    console.log(commentData)
-    const { name, img, timeSt, rating, comment } = commentData;
+  console.log(commentData);
+  const { name, img, timeSt, rating, comment } = commentData;
   return (
     <div>
       <Card className="shadow-lg lg:w-[800px] bg-gray-400 hover:bg-gray-400">
         <div className="flex justify-between">
           <div className="flex gap-3">
             <img
-              class="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+              className="p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
               src={img}
               alt="Bordered avatar"
             />

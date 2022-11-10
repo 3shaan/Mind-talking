@@ -16,7 +16,7 @@ const Banner = ({img}) => {
         <main className="px-10 lg:px-24 z-10">
           <div className="text-left">
             <h2
-              className="text-white text-6xl font-semibold"
+              className="text-white text-2xl lg:text-6xl font-semibold"
               data-aos="fade-up"
               data-aos-duration="1000"
             >
@@ -26,7 +26,7 @@ const Banner = ({img}) => {
               <div>
                 <p className="text-2xl text-white">Need Advice?</p>
               </div>
-              <div className="ml-10">
+              <div className="lg:ml-10 mt-5 lg:mt-0">
                 <button
                   type="button"
                   className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"

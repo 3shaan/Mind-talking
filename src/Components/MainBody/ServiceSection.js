@@ -21,7 +21,7 @@ const ServiceSection = () => {
       </h3>
       {/* <ServiceCard></ServiceCard> */}
       <div className="mt-10">
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-1 lg:grid-cols-3">
           {services.map((data) => (
             <ServiceCard key={data._id} ServiceData={data}></ServiceCard>
           ))}

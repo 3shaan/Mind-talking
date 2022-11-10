@@ -8,7 +8,7 @@ const ServiceCard = ({ ServiceData }) => {
     <Link to={`/services/${_id}`}>
       <div className="max-w-sm min-h-[480px] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 group overflow-hidden transform transition hover:scale-y-110 duration-500">
         <img
-          className="lg:w-96 h-64 rounded-t-lg transform transition duration-500 group-hover:scale-110 "
+          className="w-96 h-64 rounded-t-lg transform transition duration-500 group-hover:scale-110 "
           src={img}
           alt=""
         />
