@@ -15,10 +15,10 @@ const BannerCarousel = () => {
     };
     const bannerImg = [
       {
-        img: "https://cdn.pixabay.com/photo/2014/03/12/18/34/family-286229_960_720.jpg",
+        img: "https://img.freepik.com/free-photo/couple-doing-family-therapy_23-2149305192.jpg?w=1060&t=st=1668096472~exp=1668097072~hmac=87c2a79800eadcf424f3460515d531293cd62e7d5cc433f6263984fe72eb733e",
       },
       {
-        img: "https://cdn.pixabay.com/photo/2014/03/12/18/34/family-286229_960_720.jpg",
+        img: "https://img.freepik.com/free-photo/appointment-psychologist_144627-39523.jpg?w=1060&t=st=1668096547~exp=1668097147~hmac=11e717b9c1335a31cbc3a030ca8a7ed374cf20d579db2391c53e05978b44d54b",
       },
       {
         img: "https://cdn.pixabay.com/photo/2014/03/12/18/34/family-286229_960_720.jpg",
@@ -27,8 +27,8 @@ const BannerCarousel = () => {
     return (
       <div>
         <Slider {...settings}>
-          {bannerImg.map((ban) => (
-            <Banner></Banner>
+          {bannerImg.map((img) => (
+            <Banner img={img}></Banner>
           ))}
         </Slider>
         {/* <Banner></Banner> */}

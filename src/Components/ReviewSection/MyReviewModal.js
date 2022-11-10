@@ -1,6 +1,6 @@
-import { Modal} from 'flowbite-react';
-import React from 'react';
-import Swal from 'sweetalert2';
+import { Modal } from "flowbite-react";
+import React from "react";
+import Swal from "sweetalert2";
 
 const MyReviewModal = ({ open, singleReview, SetOpen, setLoad, load }) => {
   const { comment, rating, email, age, img, name } = singleReview;
@@ -22,13 +22,16 @@ const MyReviewModal = ({ open, singleReview, SetOpen, setLoad, load }) => {
       age,
       comment,
     };
-    fetch(`http://localhost:5000/user_review/${singleReview._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(review),
-    })
+    fetch(
+      `https://mind-talking-server-3shaan.vercel.app/user_review/${singleReview._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(review),
+      }
+    )
       .then((data) => {
         if (data?.ok === true) {
           Swal.fire({

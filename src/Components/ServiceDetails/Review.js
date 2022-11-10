@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import Swal from 'sweetalert2';
-import { authContext } from '../Context/Context';
+import React, { useContext } from "react";
+import Swal from "sweetalert2";
+import { authContext } from "../Context/Context";
 
 const Review = ({ singleService, load, setLoad }) => {
   const { user } = useContext(authContext);
@@ -30,12 +30,12 @@ const Review = ({ singleService, load, setLoad }) => {
       service,
       serviceId,
       timeSt,
-      email
+      email,
     };
 
     console.log(review);
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://mind-talking-server-3shaan.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -51,15 +51,12 @@ const Review = ({ singleService, load, setLoad }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-          setLoad(!load)
+          setLoad(!load);
           form.reset();
         }
-        console.log(data)
+        console.log(data);
       })
       .catch((err) => console.log(err));
-    
-
-
   };
   return (
     <div className="mt-10">

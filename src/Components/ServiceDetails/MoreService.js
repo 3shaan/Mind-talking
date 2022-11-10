@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const MoreService = ({ id }) => {
   const [restData, setRestData] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/rest/${id}`)
+    fetch(`https://mind-talking-server-3shaan.vercel.app/rest/${id}`)
       .then((res) => res.json())
       .then((data) => setRestData(data))
       .catch((err) => console.log(err));

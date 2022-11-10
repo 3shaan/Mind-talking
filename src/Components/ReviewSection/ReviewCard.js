@@ -23,7 +23,7 @@ const ReviewCard = ({ reviewData }) => {
             </div>
             <div class=" text-green-500 font-semibold absolute top-9 right-3">
               <Stars
-                stars={2.4}
+                stars={rating}
                 size={25} //optional
                 spacing={2} //optional
                 fill="#16A34A" //optional

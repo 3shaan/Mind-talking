@@ -33,9 +33,12 @@ const Header = () => {
             Services
           </Navbar.Link>
         </NavLink>
-        <Navbar.Link href="/navbars" className="hover:underline text-xl">
-          Blogs
-        </Navbar.Link>
+        <NavLink to={"/blogs"}>
+          <Navbar.Link className="hover:underline text-xl">
+            Blogs
+          </Navbar.Link>
+        </NavLink>
+       
         {user?.uid ? (
           <>
             <NavLink to={"/add_services"}>

@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Blogs from "../Components/Blogs/Blogs";
 import Login from "../Components/Login and SignUp/Login";
 import SignUp from "../Components/Login and SignUp/SignUp";
 import MainPage from "../Components/MainBody/MainPage";
@@ -26,7 +27,9 @@ export const router = createBrowserRouter([
         path: "/services/:id",
         element: <ServiceDetails></ServiceDetails>,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/services/${params.id}`);
+          return fetch(
+            `https://mind-talking-server-3shaan.vercel.app/services/${params.id}`
+          );
         },
       },
       {
@@ -52,6 +55,10 @@ export const router = createBrowserRouter([
             <AddService></AddService>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
       },
     ],
   },

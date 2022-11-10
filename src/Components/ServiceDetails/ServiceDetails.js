@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import ServiceDesc from './ServiceDesc';
 import ServiceDetailsBanner from './ServiceDetailsBanner';
@@ -13,6 +13,9 @@ const ServiceDetails = () => {
   const { _id, title, price } = service;
   const { user } = useContext(authContext);
   const [load, setLoad] = useState(false);
+  useEffect(() => {
+    document.title=(`${service?.title}-Mind Talking`);
+  },[service?.title])
     return (
       <div>
         <div>
@@ -46,12 +49,12 @@ const ServiceDetails = () => {
         {user?.uid ? (
           <Review singleService={service} load={load} setLoad={setLoad}></Review>
         ) : (
-          <div className="text-xl ml-16 mb-10 text-center font-semibold">
-            Please
-            <Link to={"/login"} className="underline text-green-600">
-              log in
+          <div className="text-xl ml-16 my-10 text-center font-semibold">
+            Please 
+            <Link to={"/login"} className="underline mx-1 text-orange-600">
+               log in 
             </Link>
-            to leave a review
+             to leave a review
           </div>
         )}
         {/* <Review></Review> */}

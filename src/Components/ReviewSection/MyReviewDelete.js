@@ -1,32 +1,39 @@
-import { Button, Modal } from 'flowbite-react';
-import React, {  } from 'react';
+import { Button, Modal } from "flowbite-react";
+import React from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
-const MyReviewDelete = ({ isDelete, SetDelete, singleReview, load, setLoad }) => {
-  
-  console.log(singleReview)
+const MyReviewDelete = ({
+  isDelete,
+  SetDelete,
+  singleReview,
+  load,
+  setLoad,
+}) => {
+  console.log(singleReview);
   const handleDelete = () => {
-     fetch(`http://localhost:5000/user_review/${singleReview?._id}`, {
-       method: "DELETE",
-     })
-       .then((data) => {
-         if (data?.ok === true) {
-           Swal.fire({
-             position: "center",
-             icon: "success",
-             title: "Review Delete successfully",
-             showConfirmButton: false,
-             timer: 1500,
-           });
-           SetDelete(false)
-           setLoad(!load);
-         }
-         console.log(data);
-         
-       })
-       .catch((err) => console.log(err));
-  }
+    fetch(
+      `https://mind-talking-server-3shaan.vercel.app/user_review/${singleReview?._id}`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((data) => {
+        if (data?.ok === true) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Review Delete successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          SetDelete(false);
+          setLoad(!load);
+        }
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <Modal show={isDelete} size="md" popup={true}>

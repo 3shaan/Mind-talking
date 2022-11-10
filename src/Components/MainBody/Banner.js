@@ -1,6 +1,6 @@
 import React from "react";
 
-const banner = () => {
+const Banner = ({img}) => {
 
   return (
     <div>
@@ -8,7 +8,7 @@ const banner = () => {
         className="relative h-[600px] w-full flex items-center justify-start text-left bg-cover bg-center"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80)",
+            `url(${img?.img})`,
         }}
       >
         <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-75"></div>
@@ -42,4 +42,4 @@ const banner = () => {
   );
 };
 
-export default banner;
+export default Banner;

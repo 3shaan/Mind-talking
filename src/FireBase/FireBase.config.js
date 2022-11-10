@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDUdMxWcBxJ9XhF-Gn7nMwbKi4OXgfv04A",
-  authDomain: "mind-talking.firebaseapp.com",
-  projectId: "mind-talking",
-  storageBucket: "mind-talking.appspot.com",
-  messagingSenderId: "1075767788148",
-  appId: "1:1075767788148:web:0e93f118db4a28761c8721",
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase
