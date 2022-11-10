@@ -1,5 +1,5 @@
 import React from "react";
-import { BsPatchCheck, BsPatchCheckFill } from "react-icons/bs";
+import { BsPatchCheck } from "react-icons/bs";
 
 const PriceSection = () => {
   return (
