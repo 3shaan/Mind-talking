@@ -1,11 +1,12 @@
 import React from "react";
 import { ImQuotesLeft } from "react-icons/im";
+import Stars from 'react-stars-display'
 
 const ReviewCard = ({ reviewData }) => {
   const { img, comment,age,service,rating,name,} = reviewData;
   return (
     <div>
-      <div class="px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800  border w-[600px] gap-10 relative">
+      <div class="lg:h-60 px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800  border w-[600px] gap-10 relative">
         <div class="flex items-center space-x-4 w-full">
           <img
             class="p-1 w-28 h-28 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 border"
@@ -13,7 +14,7 @@ const ReviewCard = ({ reviewData }) => {
             alt="Bordered avatar"
           />
           <div class="font-medium dark:text-white mb-14">
-            <div className="text-xl text-green-500">{ name}</div>
+            <div className="text-xl text-green-500">{name}</div>
             <div class="text-sm text-gray-500 dark:text-gray-400">
               {age} years old
             </div>
@@ -21,7 +22,12 @@ const ReviewCard = ({ reviewData }) => {
               {service}
             </div>
             <div class=" text-green-500 font-semibold absolute top-9 right-3">
-              Rate: {rating}
+              <Stars
+                stars={2.4}
+                size={25} //optional
+                spacing={2} //optional
+                fill="#16A34A" //optional
+              />
             </div>
           </div>
         </div>
@@ -29,9 +35,7 @@ const ReviewCard = ({ reviewData }) => {
           <div>
             <ImQuotesLeft className="text-2xl text-green-600"></ImQuotesLeft>
           </div>
-          <div className="ml-9 text-gray-600">
-           {comment}
-          </div>
+          <div className="ml-9 text-gray-600">{comment}</div>
         </div>
       </div>
     </div>

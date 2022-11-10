@@ -1,5 +1,6 @@
 import { Card } from 'flowbite-react';
 import React from 'react';
+import Stars from "react-stars-display"
 
 const CommentCard = ({ commentData }) => {
     console.log(commentData)
@@ -17,15 +18,22 @@ const CommentCard = ({ commentData }) => {
             <p className=" font-semibold">{name}</p>
             <p className="text-xs underline mt-1 cursor-pointer">
               {timeSt.slice(0, 10)}
-              
+            </p>
+            <p className="text-xs underline mt-1 cursor-pointer">
+              {timeSt.slice(11, 19)}
             </p>
           </div>
-          <div>{rating}</div>
+          <div>
+            <Stars
+              stars={rating}
+              size={25} //optional
+              spacing={2} //optional
+              fill="#16A34A" //optional
+            />
+          </div>
         </div>
         <div className="ml-10">
-          <p>
-            {comment}
-          </p>
+          <p>{comment}</p>
           <div className="flex gap-10 mt-1">
             <p className="underline cursor-pointer"> Like</p>
             <p className="underline cursor-pointer">reply</p>

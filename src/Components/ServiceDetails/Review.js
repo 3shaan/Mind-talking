@@ -1,11 +1,10 @@
-import { jsonEval } from '@firebase/util';
 import React, { useContext } from 'react';
+import Swal from 'sweetalert2';
 import { authContext } from '../Context/Context';
 
-const Review = ({ singleService }) => {
+const Review = ({ singleService, load, setLoad }) => {
   const { user } = useContext(authContext);
   console.log(user);
-  console.log(singleService);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,7 +12,9 @@ const Review = ({ singleService }) => {
     const lastName = form.lastName.value;
     const email = user?.email;
     const rating = form.rate.value;
-    const img = form.url.value;
+    const img = form.url.value
+      ? form.url.value
+      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png";
     const age = form.age.value;
     const comment = form.text.value;
     const name = firstName + " " + lastName;
@@ -41,7 +42,20 @@ const Review = ({ singleService }) => {
       },
       body: JSON.stringify(review),
     })
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data?.ok === true) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Comment successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLoad(!load)
+          form.reset();
+        }
+        console.log(data)
+      })
       .catch((err) => console.log(err));
     
 

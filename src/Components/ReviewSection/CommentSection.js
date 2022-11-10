@@ -1,29 +1,23 @@
-import React from 'react';
-import { Get } from "react-axios";
+import React, { useEffect, useState } from 'react';
 import CommentCard from './CommentCard';
 
-const CommentSection = ({id}) => {
+const CommentSection = ({ id, load }) => {
+  const [comment, setComment] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/review/${id}`)
+      .then((res) => res.json())
+      .then((data) => setComment(data))
+      .catch((err) => console.log(err));
+  }, [id, load]);
     return (
       <div>
         <h1 className="text-2xl font-semibold mb-5">
           Our Client's Comment for this service
         </h1>
-        <div>
-          <Get url={`http://localhost:5000/review/${id}`}>
-            {(error, response, isLoading, makeRequest, axios) => {
-              console.log(response?.data);
-              return (
-                <div className="">
-                  {response?.data.map((data) => (
-                    <CommentCard
-                      key={data._id}
-                      commentData={data}
-                    ></CommentCard>
-                  ))}
-                </div>
-              );
-            }}
-          </Get>
+        <div className="">
+          {comment.map((data) => (
+            <CommentCard key={data._id} commentData={data}></CommentCard>
+          ))}
         </div>
       </div>
     );
