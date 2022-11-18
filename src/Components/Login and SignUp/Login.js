@@ -28,7 +28,7 @@ const Login = () => {
         };
         console.log(email);
         //jwt token
-        fetch("https://mind-talking-server-3shaan.vercel.app/jwt", {
+        fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -62,7 +62,7 @@ const Login = () => {
         };
         //jwt token
 
-        fetch("https://mind-talking-server-3shaan.vercel.app/jwt", {
+        fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

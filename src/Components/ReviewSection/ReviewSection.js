@@ -40,7 +40,7 @@ const ReviewSection = () => {
   };
 
   useEffect(() => {
-    fetch("https://mind-talking-server-3shaan.vercel.app/review")
+    fetch("http://localhost:5000/review")
       .then((res) => res.json())
       .then((data) => setReview(data))
       .catch((err) => console.log(err));

@@ -35,15 +35,16 @@ const Review = ({ singleService, load, setLoad }) => {
 
     console.log(review);
 
-    fetch("https://mind-talking-server-3shaan.vercel.app/review", {
+    fetch("http://localhost:5000/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(review),
     })
+      .then(res=>res.json())
       .then((data) => {
-        if (data?.ok === true) {
+        if (data?.acknowledged === true) {
           Swal.fire({
             position: "center",
             icon: "success",

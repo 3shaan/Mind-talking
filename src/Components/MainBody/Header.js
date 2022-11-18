@@ -1,6 +1,6 @@
 import { Navbar } from "flowbite-react";
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { authContext } from "../Context/Context";
 
@@ -16,12 +16,14 @@ const Header = () => {
         </span>
       </Navbar.Brand>
       <div className="lg:flex md:order-2  ">
-        <button
-          type="button"
-          className="text-white hidden lg:block bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        >
-          Appointment
-        </button>
+        <Link to={"/appointments"}>
+          <button
+            type="button"
+            className="text-white hidden lg:block bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+            Appointment
+          </button>
+        </Link>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
@@ -34,11 +36,9 @@ const Header = () => {
           </Navbar.Link>
         </NavLink>
         <NavLink to={"/blogs"}>
-          <Navbar.Link className="hover:underline text-xl">
-            Blogs
-          </Navbar.Link>
+          <Navbar.Link className="hover:underline text-xl">Blogs</Navbar.Link>
         </NavLink>
-       
+
         {user?.uid ? (
           <>
             <NavLink to={"/add_services"}>

@@ -12,14 +12,12 @@ const MyReviewDelete = ({
 }) => {
   console.log(singleReview);
   const handleDelete = () => {
-    fetch(
-      `https://mind-talking-server-3shaan.vercel.app/user_review/${singleReview?._id}`,
-      {
-        method: "DELETE",
-      }
-    )
+    fetch(`http://localhost:5000/user_review/${singleReview?._id}`, {
+      method: "DELETE",
+    })
+      .then(res=>res.json())
       .then((data) => {
-        if (data?.ok === true) {
+        if (data?.acknowledged === true) {
           Swal.fire({
             position: "center",
             icon: "success",

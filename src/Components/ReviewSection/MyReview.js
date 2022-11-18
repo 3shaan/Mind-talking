@@ -16,14 +16,11 @@ const MyReview = () => {
 
   useEffect(() => {
     document.title = "My Review-Mind Talking";
-    fetch(
-      `https://mind-talking-server-3shaan.vercel.app/myreview/${user?.email}`,
-      {
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      }
-    )
+    fetch(`http://localhost:5000/myreview/${user?.email}`, {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           navigation("/login");

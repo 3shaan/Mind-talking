@@ -29,6 +29,9 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(result.user);
+        //sent user info in sever
+        userInfo(name, user?.email);
+        //
         const email = {
           email: user?.email,
         };
@@ -38,7 +41,7 @@ const SignUp = () => {
           .then(() => {
             //jwt token
 
-            fetch("https://mind-talking-server-3shaan.vercel.app/jwt", {
+            fetch("http://localhost:5000/jwt", {
               method: "POST",
               headers: {
                 "content-type": "application/json",
@@ -49,6 +52,7 @@ const SignUp = () => {
               .then((data) => {
                 console.log(data);
                 localStorage.setItem("token", data?.token);
+
                 navigation("/", { replace: true });
                 setLoading(false);
                 form.reset();
@@ -61,6 +65,8 @@ const SignUp = () => {
     console.log(name, userEmail, password);
   };
 
+
+
   const googleHandle = () => {
     googleSignIn()
       .then((data) => {
@@ -71,7 +77,7 @@ const SignUp = () => {
         };
         //jwt token
 
-        fetch("https://mind-talking-server-3shaan.vercel.app/jwt", {
+        fetch("http://localhost:5000/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -91,6 +97,21 @@ const SignUp = () => {
   useEffect(() => {
     document.title = "Signup-Mind Talking";
   }, []);
+
+// send user info into server
+  const userInfo = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type":"application/json"
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+    .catch(err=>console.log(err))
+  }
   return (
     <div>
       {loading ? (

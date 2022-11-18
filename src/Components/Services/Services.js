@@ -6,7 +6,7 @@ const Services = () => {
   const [service, setService] = useState([]);
   useEffect(() => {
     document.title = "Service-Mind Talking";
-    fetch("https://mind-talking-server-3shaan.vercel.app/services")
+    fetch("http://localhost:5000/services")
       .then((res) => res.json())
       .then((data) => setService(data))
       .catch((err) => console.log(err));

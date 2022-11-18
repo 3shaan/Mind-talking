@@ -8,7 +8,7 @@ const Blogs = () => {
   const [singleBlog, setSingleBlog] = useState([]);
   useEffect(() => {
     document.title = "Blogs-Mind Talking";
-    fetch("https://mind-talking-server-3shaan.vercel.app/blogs")
+    fetch("http://localhost:5000/blogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data))
       .catch((err) => console.log(err));
