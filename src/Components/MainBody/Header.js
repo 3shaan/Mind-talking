@@ -51,6 +51,11 @@ const Header = () => {
                 My Review
               </Navbar.Link>
             </NavLink>
+            <NavLink to={"/dashboard"}>
+              <Navbar.Link className="hover:underline text-xl">
+                Dashboard
+              </Navbar.Link>
+            </NavLink>
             <NavLink onClick={logOut}>
               <Navbar.Link className="hover:underline text-xl">
                 Log out

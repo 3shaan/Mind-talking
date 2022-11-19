@@ -12,6 +12,9 @@ import PrivateRoute from "./PrivateRoute";
 import Root from "./Root";
 import Dashboard from "../Components/Dashboard/Dashboard";
 import MainBodyDashBoard from "../Components/Dashboard/MainBodyDashBoard";
+import AllUsers from "../Components/Dashboard/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AddDoctors from "../Components/Dashboard/AddDoctors";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +81,22 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <MainBodyDashBoard></MainBodyDashBoard>,
+      },
+      {
+        path: "/dashboard/users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/add_doctors",
+        element: (
+          <AdminRoute>
+            <AddDoctors></AddDoctors>
+          </AdminRoute>
+        ),
       },
     ],
   },

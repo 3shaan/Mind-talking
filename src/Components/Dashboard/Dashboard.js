@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Header from "../MainBody/Header";
 import { BsList } from "react-icons/bs";
 import { Outlet } from "react-router";
+import { Link } from "react-router-dom";
+import useAdmin from "../Hooks/useAdmin";
+import { authContext } from "../Context/Context";
 
 const Dashboard = () => {
+  const { user } = useContext(authContext);
+  const [isAdmin] = useAdmin(user?.email);
+  console.log(isAdmin)
   return (
     <div>
       <Header></Header>
@@ -31,11 +37,18 @@ const Dashboard = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to={"/dashboard"}>My Appointments</Link>
             </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to={"/dashboard/users"}>All Users</Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/add_doctors"}>Add Doctors</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
