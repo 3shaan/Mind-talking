@@ -1,17 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Swal from "sweetalert2";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
 
 const ManageDoctors = () => {
-  const { data: doctors = [], isLoading , refetch} = useQuery({
+  const {
+    data: doctors = [],
+    isLoading,
+    refetch,
+    error,
+    isError,
+  } = useQuery({
     queryKey: "doctors",
     queryFn: async () => {
       try {
-          const res = await fetch("http://localhost:5000/doctors", {
-              headers: {
-                authorization : localStorage.getItem('token')
-            }
-        });
+        const res = await fetch(
+          "https://mind-talking-server.vercel.app/doctors",
+          {
+            headers: {
+              authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         const data = res.json();
         return data;
       } catch (error) {
@@ -20,41 +31,44 @@ const ManageDoctors = () => {
     },
   });
   if (isLoading) {
-    return <div>loading......</div>;
-    };
+    return <Loading></Loading>
+  }
 
-    const handledoctorDelete = data => {
-        Swal.fire({
-          title: `Are you sure to delete doctor ${data?.name}?`,
-          text: "You won't be able to revert this!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`http://localhost:5000/doctors/${data._id}`, {
-                    method: "DELETE",
-                    headers: {
-                        authorization:localStorage.getItem('token')
-                    }
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                         Swal.fire(
-                           "Deleted!",
-                           `Doctor ${data?.name}? has been deleted.`,
-                           "success"
-                         );
-                        console.log(data)
-                        refetch(); 
-                    })
-                    .catch(err => console.log(err));
-           
-          }
-        });
-    }
+  if (isError) {
+    return <Error isError={error}></Error>;
+  }
+
+  const handledoctorDelete = (data) => {
+    Swal.fire({
+      title: `Are you sure to delete doctor ${data?.name}?`,
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://mind-talking-server.vercel.app/doctors/${data._id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Swal.fire(
+              "Deleted!",
+              `Doctor ${data?.name}? has been deleted.`,
+              "success"
+            );
+            console.log(data);
+            refetch();
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
   return (
     <div>
       <div className="overflow-x-auto">
@@ -85,7 +99,7 @@ const ManageDoctors = () => {
                 <td>{doctor?.specialty}</td>
                 <td>
                   <button
-                    onClick={()=>handledoctorDelete(doctor)}
+                    onClick={() => handledoctorDelete(doctor)}
                     className="btn-sm rounded-lg btn-error"
                   >
                     Delete

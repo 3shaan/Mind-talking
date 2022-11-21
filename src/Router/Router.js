@@ -16,13 +16,14 @@ import AllUsers from "../Components/Dashboard/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddDoctors from "../Components/Dashboard/AddDoctors";
 import ManageDoctors from "../Components/Dashboard/ManageDoctors";
-import Payments from "../Components/Payments/Payments";
 import CheckOut from "../Components/Payments/CheckOut";
+import Error from "../Components/Loader/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -36,7 +37,9 @@ export const router = createBrowserRouter([
         path: "/services/:id",
         element: <ServiceDetails></ServiceDetails>,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/services/${params.id}`);
+          return fetch(
+            `https://mind-talking-server.vercel.app/services/${params.id}`
+          );
         },
       },
       {
@@ -69,12 +72,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "/appointments",
-        element: <AppointmentPage></AppointmentPage>,
+        element: (
+          <PrivateRoute>
+            <AppointmentPage></AppointmentPage>
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
+    errorElement: <Error></Error>,
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
@@ -87,11 +95,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/users",
-        element: (
-          
-            <AllUsers></AllUsers>
-         
-        ),
+        element: <AllUsers></AllUsers>,
       },
       {
         path: "/dashboard/add_doctors",
@@ -110,12 +114,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/payments",
-        element: (
-          
-            <CheckOut></CheckOut>
-          
-        ),
+        path: "/dashboard/payments/:id",
+        element: <CheckOut></CheckOut>,
+        loader: ({ params }) => {
+          return fetch(
+            `https://mind-talking-server.vercel.app/payment/${params.id}`
+          );
+        },
       },
     ],
   },

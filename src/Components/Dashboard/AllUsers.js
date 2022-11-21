@@ -1,22 +1,49 @@
-import React, {  useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
 
 const AllUsers = () => {
-  const [allUsers, setAllUsers] = useState([]);
+  // const [allUsers, setAllUsers] = useState([]);
   const [load, setLoad] = useState(false);
-  useEffect(() => {
-    fetch("http://localhost:5000/users", {
-      headers: {
-        authorization: localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setAllUsers(data))
-      .catch((err) => console.log(err));
-  }, [load]);
+  // useEffect(() => {
+  //   fetch("https://mind-talking-server.vercel.app/users", {
+  //     headers: {
+  //       authorization: localStorage.getItem("token"),
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setAllUsers(data))
+  //     .catch((err) => console.log(err));
+  // }, [load]);
+
+  const {
+    data: allUsers = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch("https://mind-talking-server.vercel.app/users", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  if (isError) {
+    return <Error isError={error}></Error>;
+  }
 
   const handleAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://mind-talking-server.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: localStorage.getItem("token"),

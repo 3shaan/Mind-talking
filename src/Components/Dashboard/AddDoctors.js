@@ -1,70 +1,97 @@
+import { useQuery } from "@tanstack/react-query";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdAlternateEmail } from "react-icons/md";
 import { useNavigate } from "react-router";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
 
 const AddDoctors = () => {
-    const [allServices, setAllServices] = useState([]);
-    const navigation = useNavigate();
-  useEffect(() => {
-    fetch("http://localhost:5000/services_name")
+  // const [allServices, setAllServices] = useState([]);
+  const navigation = useNavigate();
+  // useEffect(() => {
+  //   fetch("https://mind-talking-server.vercel.app/services_name")
+  //     .then((res) => res.json())
+  //     .then((data) => setAllServices(data))
+  //     .catch((err) => console.log(err));
+  // }, []);
+
+  const {
+    data: allServices = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["service"],
+    queryFn: async () => {
+      const res = await fetch(
+        "https://mind-talking-server.vercel.app/services_name"
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  if (isError) {
+    return <Error isError={error}></Error>;
+  }
+
+  const handleAddDoctor = (data) => {
+    data.preventDefault();
+    const form = data.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const select = form.select.value;
+
+    const image = form.file.files[0];
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    console.log(formData);
+    console.log(image);
+
+    fetch(
+      "https://api.imgbb.com/1/upload?key=7393967092b740dbb7156b576663d2f7",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setAllServices(data))
-      .catch((err) => console.log(err));
-  }, []);
-    const handleAddDoctor = (data) => {
-        data.preventDefault();
-        const form = data.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const select = form.select.value;
-
-        const image = form.file.files[0];
-
-        const formData = new FormData();
-        formData.append("image", image);
-
-        console.log(formData);
-        console.log(image);
-
-        fetch(
-            "https://api.imgbb.com/1/upload?key=7393967092b740dbb7156b576663d2f7", {
-                method: "POST",
-                body:formData
-          }
-        )
-            .then(res => res.json())
-            .then(imgData => {
-                if (imgData.success) {
-                    console.log(imgData.data.url)
-                    const doctor = {
-                      name,
-                      email,
-                      specialty: select,
-                      images: imgData?.data?.url,
-                    };
-                    fetch("http://localhost:5000/doctors", {
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json",
-                            authorization : localStorage.getItem('token')
-                        },
-                        body: JSON.stringify(doctor)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data)
-                            if (data.acknowledged) {
-                                toast.success(`${name} added successfully`)
-                                navigation('/dashboard/manage_Doctors')
-                            }
-                        })
-                        .catch(err => console.log(err));
-                }
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+          const doctor = {
+            name,
+            email,
+            specialty: select,
+            images: imgData?.data?.url,
+          };
+          fetch("https://mind-talking-server.vercel.app/doctors", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: localStorage.getItem("token"),
+            },
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.acknowledged) {
+                toast.success(`${name} added successfully`);
+                navigation("/dashboard/manage_Doctors");
+              }
             })
             .catch((err) => console.log(err));
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="w-96 mx-auto mt-10">

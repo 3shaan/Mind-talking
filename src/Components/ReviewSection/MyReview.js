@@ -16,7 +16,7 @@ const MyReview = () => {
 
   useEffect(() => {
     document.title = "My Review-Mind Talking";
-    fetch(`http://localhost:5000/myreview/${user?.email}`, {
+    fetch(`https://mind-talking-server.vercel.app/myreview/${user?.email}`, {
       headers: {
         authorization: localStorage.getItem("token"),
       },

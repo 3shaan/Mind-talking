@@ -4,7 +4,7 @@ import CommentCard from "./CommentCard";
 const CommentSection = ({ id, load }) => {
   const [comment, setComment] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/review/${id}`)
+    fetch(`https://mind-talking-server.vercel.app/review/${id}`)
       .then((res) => res.json())
       .then((data) => setComment(data))
       .catch((err) => console.log(err));
@@ -23,7 +23,7 @@ const CommentSection = ({ id, load }) => {
           </div>
         </div>
       ) : (
-        <div>""</div>
+        <div></div>
       )}
     </div>
   );

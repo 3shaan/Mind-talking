@@ -22,14 +22,17 @@ const MyReviewModal = ({ open, singleReview, SetOpen, setLoad, load }) => {
       age,
       comment,
     };
-    fetch(`http://localhost:5000/user_review/${singleReview._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(review),
-    })
-      .then(res=>res.json())
+    fetch(
+      `https://mind-talking-server.vercel.app/user_review/${singleReview._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(review),
+      }
+    )
+      .then((res) => res.json())
       .then((data) => {
         if (data?.acknowledged === true) {
           Swal.fire({

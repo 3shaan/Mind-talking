@@ -1,7 +1,7 @@
 import React from "react";
 
 const AppointmentCard = ({ data, handleSubmit }) => {
-  const { name, slots } = data;
+  const { name, slots , price } = data;
   return (
     <div>
       <div className="w-full max-w-sm px-4 py-3 bg-slate-100 hover:bg-slate-200 rounded-md shadow-xl dark:bg-gray-800 flex flex-col justify-center items-center gap-2">
@@ -10,6 +10,7 @@ const AppointmentCard = ({ data, handleSubmit }) => {
         <p>
           {slots.length} {slots.length > 0 ? "spaces" : "space"} available
         </p>
+        <h1>${price}</h1>
         <button
           onClick={() => handleSubmit(data)}
           type="button"

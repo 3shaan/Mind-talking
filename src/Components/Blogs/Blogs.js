@@ -1,18 +1,34 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
 import BlogsModal from "./BlogsModal";
 
 const Blogs = () => {
-  const [blogs, setBlogs] = useState([]);
   const [open, setOpen] = useState(false);
   const [singleBlog, setSingleBlog] = useState([]);
-  useEffect(() => {
-    document.title = "Blogs-Mind Talking";
-    fetch("http://localhost:5000/blogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data))
-      .catch((err) => console.log(err));
-  }, []);
+
+  const {
+    data: blogs = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["blogs"],
+    queryFn: async () => {
+      const res = await fetch("https://mind-talking-server.vercel.app/blogs");
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  if (isError) {
+    console.log(error.message);
+    return <Error isError={error}></Error>;
+  }
   const handleModal = (data) => {
     setOpen(true);
     setSingleBlog(data);
@@ -26,7 +42,10 @@ const Blogs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 mx-auto lg:w-9/12 gap-10">
           {blogs?.map((blog) => {
             return (
-              <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+              <div
+                key={blog?._id}
+                className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+              >
                 <div>
                   <img
                     className="rounded-t-lg h-52 w-96"
@@ -42,7 +61,7 @@ const Blogs = () => {
                   </div>
                   <p className="text-sm my-3">{blog?.time.slice(0, 10)}</p>
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {blog?.ans.slice(0, 100)}...
+                    {blog?.ans?.slice(0, 100)}...
                   </p>
                   <button
                     onClick={() => handleModal(blog)}

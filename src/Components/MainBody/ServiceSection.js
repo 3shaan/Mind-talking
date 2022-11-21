@@ -6,7 +6,7 @@ import ServiceCard from "../Services/ServiceCard";
 const ServiceSection = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/homeservice")
+    fetch("https://mind-talking-server.vercel.app/homeservice")
       .then((res) => res.json())
       .then((data) => setServices(data))
       .catch((err) => console.log(err));

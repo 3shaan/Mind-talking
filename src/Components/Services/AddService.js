@@ -23,7 +23,7 @@ const AddService = () => {
       timeSt: new Date(),
     };
 
-    fetch(`http://localhost:5000/services`, {
+    fetch(`https://mind-talking-server.vercel.app/services`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,7 +31,6 @@ const AddService = () => {
       },
       body: JSON.stringify(service),
     })
-      
       .then((data) => {
         console.log(data);
         if (data.status === 401 || data.status === 403) {

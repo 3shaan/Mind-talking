@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import Slider from "react-slick";
+import Loading from "../Loader/Loading";
+import Error from "../Loader/Error";
+import { useQuery } from "@tanstack/react-query";
 
 const ReviewSection = () => {
-  const [review, setReview] = useState([]);
+  // const [review, setReview] = useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -39,12 +41,31 @@ const ReviewSection = () => {
     ],
   };
 
-  useEffect(() => {
-    fetch("http://localhost:5000/review")
-      .then((res) => res.json())
-      .then((data) => setReview(data))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://mind-talking-server.vercel.app/review")
+  //     .then((res) => res.json())
+  //     .then((data) => setReview(data))
+  //     .catch((err) => console.log(err));
+  // }, []);
+  const {
+    data: review = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["review"],
+    queryFn: async () => {
+      const res = await fetch("https://mind-talking-server.vercel.app/review");
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  if (isError) {
+    return <Error isError={error}></Error>;
+  }
   return (
     <div>
       <div className="my-10">

@@ -9,10 +9,10 @@ const AppointmentModal = ({
   singleData,
   date,
   SetSingleData,
-  load,
-  setLaod,
+  refetch,
 }) => {
-  const { name: appointmentName, slots } = singleData;
+  const { name: appointmentName, slots, price } = singleData;
+  console.log(singleData);
   const { user } = useContext(authContext);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,9 +29,10 @@ const AppointmentModal = ({
       email,
       name,
       phone,
+      price,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://mind-talking-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -41,13 +42,14 @@ const AppointmentModal = ({
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged === true) {
+          toast.success("your appointment added, please pay to see the doctor");
           SetSingleData(null);
-          setLaod(!load);
+          refetch();
         } else {
           console.log(data);
           toast.error(data.message);
           SetSingleData(null);
-          setLaod(!load);
+          refetch();
         }
       })
       .catch((err) => console.log(err));

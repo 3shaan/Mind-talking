@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router';
 import { authContext } from '../Components/Context/Context';
-import PuffLoader from "react-spinners/PuffLoader";
+import Loading from '../Components/Loader/Loading';
 
 
 const PrivateRoute = ({ children }) => {
@@ -9,11 +9,7 @@ const PrivateRoute = ({ children }) => {
     console.log(user)
     const location = useLocation();
     if (isLoading) {
-        return (
-          <div className="flex justify-center items-center mt-10">
-            <PuffLoader color="#36d7b7" size={300} />
-          </div>
-        );
+        return <Loading></Loading>
     }
     if (!user) {
         return <Navigate to={'/login'} state={{from:location}} replace></Navigate>

@@ -1,26 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import AppointmentCard from './AppointmentCard';
+import React, { useEffect, useState } from "react";
+import AppointmentCard from "./AppointmentCard";
 import { format } from "date-fns";
-import AppointmentModal from './AppointmentModal';
+import AppointmentModal from "./AppointmentModal";
+import Loading from "../Loader/Loading";
+import Error from "../Loader/Error";
+import { useQuery } from "@tanstack/react-query";
 
 const AppointmentSelect = ({ selectedDate }) => {
-    const [appointments, setAppointments] = useState([]);
-    const [isOpen, setOpen] = useState(false);
-    const [singleData, SetSingleData] = useState(null);
-    const date = format(selectedDate, "PP");
-  const [load, setLaod] = useState(false);
+  // const [appointments, setAppointments] = useState([]);
+  const [isOpen, setOpen] = useState(false);
+  const [singleData, SetSingleData] = useState(null);
+  const date = format(selectedDate, "PP");
+  // const [load, setLaod] = useState(false);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/appointments?date=${date}`)
-      .then((res) => res.json())
-      .then((data) => setAppointments(data))
-      .catch((err) => console.log(err));
-  }, [date, load]);
-    
-    const handleSubmit = (data) => {
-        SetSingleData(data);
-        setOpen(true);
-    }
+  // useEffect(() => {
+  //   fetch(`https://mind-talking-server.vercel.app/appointments?date=${date}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setAppointments(data))
+  //     .catch((err) => console.log(err));
+  // }, [date, load]);
+
+  const {
+    data: appointments = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["date"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://mind-talking-server.vercel.app/appointments?date=${date}`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  if (isError) {
+    console.log(isError);
+    return <Error isError={error}></Error>;
+  }
+
+  const handleSubmit = (data) => {
+    SetSingleData(data);
+    setOpen(true);
+  };
   return (
     <div className="w-10/12 mx-auto">
       <h1 className="text-center text-2xl text-green-500 font-semibold my-5">
@@ -43,8 +70,7 @@ const AppointmentSelect = ({ selectedDate }) => {
             singleData={singleData}
             date={date}
             SetSingleData={SetSingleData}
-            load={load}
-            setLaod={setLaod}
+            refetch={refetch}
           ></AppointmentModal>
         )}
       </div>
