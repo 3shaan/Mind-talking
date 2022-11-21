@@ -3,8 +3,13 @@ import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 const FooterSection = () => {
   return (
-    <div>
-      <footer className="p-4 text-white sm:p-6 bg-gray-900">
+    <div
+      className="relative w-full bg-gray-100 bg-cover bg-center"
+      style={{
+        backgroundImage: `url(https://i.ibb.co/8zF9xHx/footer.png)`,
+      }}
+    >
+      <footer className="p-4  sm:p-6 ">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <p className="text-xl font-bold">Mind Talking</p>
@@ -34,9 +39,7 @@ const FooterSection = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-white">
-                Right
-              </h2>
+              <h2 className="mb-6 text-sm font-semibold uppercase ">Right</h2>
               <ul className=" dark:text-gray-400">
                 <li className="mb-4">
                   <a href="." className="hover:underline">

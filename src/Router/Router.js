@@ -15,6 +15,9 @@ import MainBodyDashBoard from "../Components/Dashboard/MainBodyDashBoard";
 import AllUsers from "../Components/Dashboard/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddDoctors from "../Components/Dashboard/AddDoctors";
+import ManageDoctors from "../Components/Dashboard/ManageDoctors";
+import Payments from "../Components/Payments/Payments";
+import CheckOut from "../Components/Payments/CheckOut";
 
 export const router = createBrowserRouter([
   {
@@ -85,9 +88,9 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/users",
         element: (
-          <AdminRoute>
+          
             <AllUsers></AllUsers>
-          </AdminRoute>
+         
         ),
       },
       {
@@ -96,6 +99,22 @@ export const router = createBrowserRouter([
           <AdminRoute>
             <AddDoctors></AddDoctors>
           </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage_Doctors",
+        element: (
+          <AdminRoute>
+            <ManageDoctors></ManageDoctors>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payments",
+        element: (
+          
+            <CheckOut></CheckOut>
+          
         ),
       },
     ],
