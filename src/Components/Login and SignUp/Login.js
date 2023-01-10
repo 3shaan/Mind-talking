@@ -130,7 +130,7 @@ const Login = () => {
               <label htmlFor="email">Email :</label>
               <label className="relative block mb-4 ">
                 <MdAlternateEmail className="transition pointer-events-none w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-3"></MdAlternateEmail>
-                <input
+                <input 
                   onFocus={() => setError("")}
                   type="email"
                   name="email"

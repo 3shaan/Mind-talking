@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 const Expreance = () => {
     return (
       <div>
-        <section className="p-6 bg-gray-300 dark:bg-gray-800 dark:text-gray-200">
+        <section className="p-6 bg-gray-300 dark:bg-[#1c293d] dark:text-gray-200">
           <div className="container mx-auto grid justify-center grid-cols-2 text-center lg:grid-cols-3">
             <div className="flex flex-col justify-start m-2 lg:m-6">
               <p className="text-4xl font-bold leading-none lg:text-6xl">

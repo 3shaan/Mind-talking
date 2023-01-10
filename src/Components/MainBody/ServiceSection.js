@@ -12,11 +12,11 @@ const ServiceSection = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="mt-20 w-11/12 mx-auto">
-      <h1 className="text-3xl text-center font-bold text-gray-700">
+    <div className="mt-20 w-11/12 mx-auto ">
+      <h1 className="text-3xl text-center font-bold text-gray-700 dark:text-gray-100">
         What I'm Offer...
       </h1>
-      <h3 className="text-xl text-center text-gray-700">
+      <h3 className="text-xl text-center text-gray-700 dark:text-gray-100">
         I am offering flowing services and consulting.
       </h3>
       {/* <ServiceCard></ServiceCard> */}

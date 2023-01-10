@@ -4,8 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode:'class',
   theme: {
-    extend: {},
+    extend: {
+      color: {
+        primary:"#1c293d"
+      }
+    },
   },
   plugins: [require("flowbite/plugin"), require("daisyui")],
   daisyui: {

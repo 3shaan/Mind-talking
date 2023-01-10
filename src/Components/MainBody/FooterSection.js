@@ -4,7 +4,7 @@ import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 const FooterSection = () => {
   return (
     <div
-      className="relative w-full bg-gray-100 bg-cover bg-center"
+      className="relative w-full bg-gray-100 dark:bg-gray-800 bg-cover bg-center"
       style={{
         backgroundImage: `url(https://i.ibb.co/8zF9xHx/footer.png)`,
       }}

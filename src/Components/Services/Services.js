@@ -6,15 +6,6 @@ import Loading from "../Loader/Loading";
 import Error from "../Loader/Error";
 
 const Services = () => {
-  // const [service, setService] = useState([]);
-  // useEffect(() => {
-  //   document.title = "Service-Mind Talking";
-  //   fetch("https://mind-talking-server.vercel.app/services")
-  //     .then((res) => res.json())
-  //     .then((data) => setService(data))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
     const {
       data: service = [],
       isLoading,
