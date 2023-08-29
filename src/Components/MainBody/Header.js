@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <Navbar fluid={true} rounded={true}>
-      <Navbar.Brand href="https://flowbite.com/">
+      <Navbar.Brand href="/">
         <img src={logo} className=" h-6 sm:h-9" alt="Flowbite Logo" />
         <span className="self-center text-green-600 whitespace-nowrap text-3xl font-bold dark:text-white">
           Mind Talking
@@ -56,7 +56,7 @@ const Header = () => {
           <input className="invisible" type="checkbox" />
 
           <svg
-            className="swap-on fill-current w-10 h-10"
+            className="swap-on fill-current w-10 h-10 text-white"
             onClick={handleDarkMode}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -85,11 +85,11 @@ const Header = () => {
             Services
           </Navbar.Link>
         </NavLink>
-        <NavLink to={"/blogs"}>
+        {/* <NavLink to={"/blogs"}>
           <Navbar.Link className="hover:underline text-xl dark:text-white">
             Blogs
           </Navbar.Link>
-        </NavLink>
+        </NavLink> */}
 
         {user?.uid ? (
           <>

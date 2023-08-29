@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
+import { updateProfile } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
 import {
   MdAlternateEmail,
   MdFacebook,
   MdOutlineLock,
   MdPerson,
 } from "react-icons/md";
-import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Context";
-import { updateProfile } from "firebase/auth";
-import ClockLoader from "react-spinners/ClockLoader";
 
 const SignUp = () => {
   const { SignIn, auth, googleSignIn } = useContext(authContext);

@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
-import MoonLoader from "react-spinners/MoonLoader";
-import { MdAlternateEmail, MdFacebook, MdOutlineLock } from "react-icons/md";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineGithub,
   AiOutlineGoogle,
 } from "react-icons/ai";
+import { MdAlternateEmail, MdFacebook, MdOutlineLock } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Context";
 

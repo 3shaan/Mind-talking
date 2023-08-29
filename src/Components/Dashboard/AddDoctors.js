@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdAlternateEmail } from "react-icons/md";

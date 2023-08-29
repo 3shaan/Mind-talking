@@ -35,7 +35,7 @@ const ReviewCard = ({ reviewData }) => {
           <div>
             <ImQuotesLeft className="text-2xl text-green-600"></ImQuotesLeft>
           </div>
-          <div className="text-sm lg:ml-9 text-gray-600">{comment}</div>
+          <div className="text-sm lg:ml-9 text-gray-600 dark:text-white">{comment}</div>
         </div>
       </div>
     </div>

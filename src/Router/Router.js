@@ -66,10 +66,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/blogs",
-        element: <Blogs></Blogs>,
-      },
+      // {
+      //   path: "/blogs",
+      //   element: <Blogs></Blogs>,
+      // },
       {
         path: "/appointments",
         element: (

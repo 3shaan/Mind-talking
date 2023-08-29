@@ -1,9 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
 import ServiceBanner from "./ServiceBanner";
 import ServiceCard from "./ServiceCard";
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import Loading from "../Loader/Loading";
-import Error from "../Loader/Error";
 
 const Services = () => {
     const {

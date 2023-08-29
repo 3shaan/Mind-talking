@@ -19,10 +19,10 @@ const FooterSection = () => {
               <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
                 Follow me
               </h2>
-              <ul className=" dark:text-gray-400">
+              <ul className=" dark:text-white">
                 <li className="mb-4">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://www.facebook.com/eshan.benjamin01/"
                     className="hover:underline "
                   >
                     Facebook
@@ -30,7 +30,7 @@ const FooterSection = () => {
                 </li>
                 <li>
                   <a
-                    href="https://discord.gg/4eeurUVvTy"
+                    href="https://wa.me/01303694937"
                     className="hover:underline"
                   >
                     Whatsapp
@@ -40,7 +40,7 @@ const FooterSection = () => {
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold uppercase ">Right</h2>
-              <ul className=" dark:text-gray-400">
+              <ul className=" dark:text-white">
                 <li className="mb-4">
                   <a href="." className="hover:underline">
                     Privacy Policy
@@ -57,14 +57,14 @@ const FooterSection = () => {
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-white">
             © 2022{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
+            <a href="/" className="hover:underline">
               Mind Talking™
             </a>
             . All Rights Reserved.
           </span>
-          <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+          {/* <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             <a href="." className="text-gray-500 dark:hover:text-white">
               <BsFacebook></BsFacebook>
               <span className="sr-only">Facebook page</span>
@@ -90,7 +90,7 @@ const FooterSection = () => {
               <BsGithub></BsGithub>
               <span className="sr-only">GitHub account</span>
             </a>
-          </div>
+          </div> */}
         </div>
       </footer>
     </div>

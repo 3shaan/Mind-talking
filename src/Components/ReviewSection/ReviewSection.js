@@ -69,7 +69,7 @@ const ReviewSection = () => {
   return (
     <div>
       <div className="my-10">
-        <h1 className="text-3xl text-center font-semibold text-gray-700">
+        <h1 className="text-3xl text-center font-semibold text-gray-700 dark:text-white">
           Happy client About me
         </h1>
         <p className="text-center text-xl text-green-600 font-semibold mt-3">

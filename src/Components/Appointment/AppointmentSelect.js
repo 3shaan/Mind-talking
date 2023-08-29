@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import AppointmentCard from "./AppointmentCard";
-import { format } from "date-fns";
-import AppointmentModal from "./AppointmentModal";
-import Loading from "../Loader/Loading";
-import Error from "../Loader/Error";
 import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import React, { useState } from "react";
+import Error from "../Loader/Error";
+import Loading from "../Loader/Loading";
+import AppointmentCard from "./AppointmentCard";
+import AppointmentModal from "./AppointmentModal";
 
 const AppointmentSelect = ({ selectedDate }) => {
   // const [appointments, setAppointments] = useState([]);
